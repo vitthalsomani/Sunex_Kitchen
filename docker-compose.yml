@@ -1,0 +1,62 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: sspl_mongo
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "27019:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: |
+        mongosh --quiet --eval "
+          try {
+            rs.status().ok
+          } catch (e) {
+            rs.initiate({_id:'rs0', members:[{_id:0, host:'mongo:27017'}]}).ok
+          }
+        "
+      interval: 10s
+      start_period: 20s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: sspl_redis
+    ports:
+      - "6381:6379"
+    volumes:
+      - redis_data:/data
+
+  backend:
+    build: ./backend
+    container_name: sspl_backend
+    env_file: .env
+    ports:
+      - "8090:8000"
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    volumes:
+      - ./backend:/app
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build: ./frontend
+    container_name: sspl_frontend
+    ports:
+      - "5180:5180"
+    environment:
+      - VITE_API_BASE_URL=http://localhost:8090/api
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run dev -- --host 0.0.0.0 --port 5180
+
+volumes:
+  mongo_data:
+  redis_data:
