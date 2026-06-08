@@ -44,6 +44,28 @@ docker compose up --build
 ### Reports
 - **Monthly Mess Cost Analysis** — total meals, gas/coal, grocery & veg, oil, manpower, contractor payment, total expense, cost per meal
 
+## Production deploy (sunexstones.com/mess)
+
+```bash
+# on the server
+sudo mkdir -p /opt/sunex_mess
+cd /opt/sunex_mess
+git clone https://github.com/vitthalsomani/Sunex_Kitchen.git .
+cp .env.prod.example .env
+# edit .env: set JWT_SECRET (openssl rand -hex 64) and ADMIN_PASSWORD
+./deploy/deploy.sh
+```
+
+The deploy script:
+1. Builds and starts the prod stack (`docker-compose.prod.yml`)
+   - Frontend: built React SPA served by nginx, bound to `127.0.0.1:3120`
+   - Backend: FastAPI/uvicorn with `--root-path /mess/api`, bound to `127.0.0.1:3121`
+   - Mongo + Redis: internal-only (no host port)
+2. Installs `/etc/nginx/snippets/mess.conf` and includes it from `sunexstones.conf`
+3. Reloads nginx → live at **https://sunexstones.com/mess/**
+
+To update after a `git pull`, just re-run `./deploy/deploy.sh`.
+
 ## Local dev (without Docker)
 
 ```bash

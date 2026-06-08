@@ -1,0 +1,88 @@
+# Production stack for sunexstones.com /mess deployment.
+# - Frontend serves built SPA via nginx, exposed at 127.0.0.1:3120
+# - Backend uvicorn exposed at 127.0.0.1:3121
+# - Mongo + Redis are internal-only (no host port)
+# - Host nginx reverse-proxies via /etc/nginx/snippets/mess.conf
+#
+# Usage:
+#   cp .env.prod.example .env
+#   # edit .env to set JWT_SECRET, ADMIN_PASSWORD, etc.
+#   docker compose -f docker-compose.prod.yml up -d --build
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: sspl_mess_mongo
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - sspl_mess
+    restart: unless-stopped
+    healthcheck:
+      test: |
+        mongosh --quiet --eval "
+          try {
+            rs.status().ok
+          } catch (e) {
+            rs.initiate({_id:'rs0', members:[{_id:0, host:'mongo:27017'}]}).ok
+          }
+        "
+      interval: 10s
+      start_period: 20s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    container_name: sspl_mess_redis
+    volumes:
+      - redis_data:/data
+    networks:
+      - sspl_mess
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    container_name: sspl_mess_backend
+    env_file: .env
+    ports:
+      - "127.0.0.1:3121:8000"
+    depends_on:
+      mongo:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - sspl_mess
+    restart: unless-stopped
+    # --root-path lets FastAPI emit correct absolute URLs in /docs even though
+    # the request reaches it stripped of the /mess/api prefix.
+    command: >
+      uvicorn app.main:app
+      --host 0.0.0.0
+      --port 8000
+      --root-path /mess/api
+      --proxy-headers
+      --forwarded-allow-ips=*
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.prod
+      args:
+        VITE_BASE_PATH: /mess/
+        VITE_API_BASE_URL: /mess/api
+    container_name: sspl_mess_frontend
+    ports:
+      - "127.0.0.1:3120:80"
+    networks:
+      - sspl_mess
+    restart: unless-stopped
+
+networks:
+  sspl_mess:
+    driver: bridge
+
+volumes:
+  mongo_data:
+  redis_data:

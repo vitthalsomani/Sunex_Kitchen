@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-const baseURL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
+// Three resolution paths:
+//   1. Explicit VITE_API_BASE_URL (used in dev & prod) wins.
+//   2. Otherwise derive from BASE_URL (e.g. /mess/ -> /mess/api).
+//   3. Fall back to /api for plain root deployments.
+const explicit = import.meta.env.VITE_API_BASE_URL;
+const baseFromMount = (import.meta.env.BASE_URL || '/').replace(/\/$/, '') + '/api';
+const baseURL = explicit && explicit.length > 0 ? explicit : baseFromMount || '/api';
 
 export const api = axios.create({ baseURL });
 
@@ -18,8 +24,9 @@ api.interceptors.response.use(
   (err) => {
     if (err?.response?.status === 401) {
       localStorage.removeItem('token');
-      if (window.location.pathname !== '/login') {
-        window.location.assign('/login');
+      const loginUrl = (import.meta.env.BASE_URL || '/').replace(/\/$/, '') + '/login' || '/login';
+      if (!window.location.pathname.endsWith('/login')) {
+        window.location.assign(loginUrl);
       }
     }
     return Promise.reject(err);
