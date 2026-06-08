@@ -31,7 +31,7 @@ docker compose -f docker-compose.prod.yml up -d --build
 
 echo "==> Waiting for backend to be ready"
 for i in {1..30}; do
-    if curl -fsS http://127.0.0.1:3121/health >/dev/null 2>&1; then
+    if curl -fsS http://127.0.0.1:3131/health >/dev/null 2>&1; then
         echo "    backend OK"
         break
     fi
@@ -43,7 +43,7 @@ for i in {1..30}; do
 done
 
 echo "==> Verifying frontend container"
-if ! curl -fsS http://127.0.0.1:3120/healthz >/dev/null 2>&1; then
+if ! curl -fsS http://127.0.0.1:3130/healthz >/dev/null 2>&1; then
     echo "ERROR: frontend container not responding" >&2
     exit 1
 fi

@@ -58,8 +58,8 @@ cp .env.prod.example .env
 
 The deploy script:
 1. Builds and starts the prod stack (`docker-compose.prod.yml`)
-   - Frontend: built React SPA served by nginx, bound to `127.0.0.1:3120`
-   - Backend: FastAPI/uvicorn with `--root-path /mess/api`, bound to `127.0.0.1:3121`
+   - Frontend: built React SPA served by nginx, bound to `127.0.0.1:3130`
+   - Backend: FastAPI/uvicorn with `--root-path /mess/api`, bound to `127.0.0.1:3131`
    - Mongo + Redis: internal-only (no host port)
 2. Installs `/etc/nginx/snippets/mess.conf` and includes it from `sunexstones.conf`
 3. Reloads nginx → live at **https://sunexstones.com/mess/**
