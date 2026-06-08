@@ -19,7 +19,7 @@ import dayjs from 'dayjs';
 
 import { itemsApi, stockApi } from '../api/endpoints';
 import { useAuth } from '../context/AuthContext';
-import type { Item, StockRow } from '../types';
+import type { StockRow } from '../types';
 
 interface RowState {
   item_id: string;
