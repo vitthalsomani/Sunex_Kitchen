@@ -1,0 +1,9 @@
+# Force LF for files executed on the Linux VPS / in CI, regardless of the
+# committer's OS (Windows checkouts must not introduce CRLF here, or bash on the
+# server breaks with "\r: command not found" style errors).
+*.sh        text eol=lf
+*.yml       text eol=lf
+*.yaml      text eol=lf
+Dockerfile  text eol=lf
+Dockerfile.* text eol=lf
+*.conf      text eol=lf
