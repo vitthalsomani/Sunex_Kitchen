@@ -15,6 +15,9 @@ export default defineConfig(({ mode }) => {
     server: {
       port: 5180,
       host: true,
+      // Bind-mounted source on Windows/Docker doesn't emit native fs events,
+      // so poll for changes to keep HMR working in the container.
+      watch: { usePolling: true, interval: 300 },
     },
     test: {
       environment: 'jsdom',

@@ -31,6 +31,9 @@ Thumbs.db
 # Docker volumes
 data/
 
+# Local Docker overrides
+docker-compose.override.yml
+
 # Playwright
 playwright-report/
 test-results/
