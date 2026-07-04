@@ -3,12 +3,20 @@ import { useTheme } from '@mui/material/styles';
 import { BRAND } from '../theme';
 
 /**
- * Atmospheric background: soft warm radial glows behind everything, plus the
- * grain overlay (applied via the `.sunex-grain` class on the wrapper).
+ * Foundry atmosphere: a cool steel wash with one faint ember glow in the corner,
+ * over a very low-opacity blueprint grid — evoking engineering paper / a ruled
+ * store register. Static (no motion), so it's inherently reduced-motion safe.
  */
 export default function AppBackground() {
   const theme = useTheme();
   const dark = theme.palette.mode === 'dark';
+
+  const grid = dark ? 'rgba(231,236,240,0.04)' : 'rgba(20,24,27,0.035)';
+  const wash = dark
+    ? `radial-gradient(70rem 46rem at 100% -6%, ${hexA(BRAND.ember, 0.1)}, transparent 55%),
+       radial-gradient(60rem 44rem at -6% 108%, rgba(80,110,130,0.12), transparent 60%)`
+    : `radial-gradient(70rem 46rem at 100% -8%, ${hexA(BRAND.ember, 0.07)}, transparent 55%),
+       radial-gradient(60rem 44rem at -6% 108%, rgba(120,140,160,0.12), transparent 60%)`;
 
   return (
     <Box
@@ -18,19 +26,17 @@ export default function AppBackground() {
         inset: 0,
         zIndex: 0,
         pointerEvents: 'none',
-        background: dark
-          ? `radial-gradient(60rem 40rem at 12% -8%, ${alphaHex(BRAND.orange, 0.18)}, transparent 60%),
-             radial-gradient(50rem 36rem at 100% 0%, ${alphaHex(BRAND.ember, 0.12)}, transparent 55%),
-             radial-gradient(48rem 40rem at 50% 120%, ${alphaHex(BRAND.amber, 0.1)}, transparent 60%)`
-          : `radial-gradient(60rem 40rem at 10% -10%, ${alphaHex(BRAND.orange, 0.16)}, transparent 60%),
-             radial-gradient(52rem 38rem at 100% -4%, ${alphaHex(BRAND.amber, 0.14)}, transparent 58%),
-             radial-gradient(46rem 38rem at 50% 118%, ${alphaHex(BRAND.orangeSoft, 0.12)}, transparent 60%)`,
+        backgroundColor: theme.palette.background.default,
+        backgroundImage: `${wash},
+          linear-gradient(${grid} 1px, transparent 1px),
+          linear-gradient(90deg, ${grid} 1px, transparent 1px)`,
+        backgroundSize: 'auto, 32px 32px, 32px 32px',
       }}
     />
   );
 }
 
-function alphaHex(hex: string, a: number): string {
+function hexA(hex: string, a: number): string {
   const n = Math.round(a * 255).toString(16).padStart(2, '0');
   return `${hex}${n}`;
 }

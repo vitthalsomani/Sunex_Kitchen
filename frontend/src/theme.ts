@@ -1,116 +1,119 @@
 import { alpha, createTheme, type Theme } from '@mui/material/styles';
 
 /**
- * "Warm Quartz" — a luxury-minimal palette for Sunex Stones.
- * Brand orange as a glowing accent over warm stone neutrals (not cold blue SaaS).
+ * "Foundry" — an industrial control-panel identity for the factory kitchen ERP.
+ * Cool steel canvas, a single ember accent (kin to the orange crown mark), and a
+ * monospaced tabular face for every number so the app reads like a precise register.
  */
 export const BRAND = {
-  orange: '#E8852C',
-  orangeDeep: '#C96E1B',
-  orangeSoft: '#F4A65A',
-  amber: '#F5B544',
-  ember: '#FF6A3D',
+  ember: '#EA6A1E',
+  emberDeep: '#C2540E',
+  emberSoft: '#F58234',
+  gain: '#1E9E6A',
+  loss: '#D6453D',
+  warn: '#E0A012',
 };
 
-const DISPLAY_FONT = '"Bricolage Grotesque", "Manrope", system-ui, sans-serif';
-const BODY_FONT = '"Manrope", system-ui, -apple-system, sans-serif';
+const DISPLAY_FONT = '"Space Grotesk", "Hanken Grotesk", system-ui, sans-serif';
+const BODY_FONT = '"Hanken Grotesk", system-ui, -apple-system, sans-serif';
+export const MONO_FONT = '"Space Mono", ui-monospace, "SFMono-Regular", monospace';
+
+/** Apply to any cell/label that holds a number so figures align like a ledger. */
+export const tabularSx = { fontFamily: MONO_FONT, fontVariantNumeric: 'tabular-nums' } as const;
 
 export function buildTheme(mode: 'light' | 'dark'): Theme {
   const isDark = mode === 'dark';
 
-  const bgDefault = isDark ? '#14110E' : '#F7F4EF';
-  const bgPaper = isDark ? '#1C1813' : '#FFFFFF';
-  const textPrimary = isDark ? '#F3EDE4' : '#211C16';
-  const textSecondary = isDark ? alpha('#F3EDE4', 0.62) : alpha('#211C16', 0.58);
-  const divider = isDark ? alpha('#F3EDE4', 0.1) : alpha('#211C16', 0.09);
+  const canvas = isDark ? '#0F1417' : '#EDF0F3';
+  const surface = isDark ? '#171D22' : '#FFFFFF';
+  const ink = isDark ? '#E7ECF0' : '#14181B';
+  const steel = isDark ? '#8A97A2' : '#64707A';
+  const line = isDark ? alpha('#E7ECF0', 0.1) : '#D6DCE1';
+  const ember = isDark ? BRAND.emberSoft : BRAND.ember;
 
   return createTheme({
     palette: {
       mode,
-      primary: {
-        main: BRAND.orange,
-        dark: BRAND.orangeDeep,
-        light: BRAND.orangeSoft,
-        contrastText: '#1a1208',
-      },
-      secondary: { main: isDark ? '#C8BCA8' : '#5A5043' },
-      background: { default: bgDefault, paper: bgPaper },
-      text: { primary: textPrimary, secondary: textSecondary },
-      divider,
-      success: { main: '#3FB07A' },
-      warning: { main: BRAND.amber },
-      error: { main: '#E25563' },
+      primary: { main: ember, dark: BRAND.emberDeep, light: BRAND.emberSoft, contrastText: '#FFFFFF' },
+      secondary: { main: steel },
+      background: { default: canvas, paper: surface },
+      text: { primary: ink, secondary: steel },
+      divider: line,
+      success: { main: BRAND.gain },
+      warning: { main: BRAND.warn },
+      error: { main: BRAND.loss },
     },
-    shape: { borderRadius: 16 },
+    shape: { borderRadius: 14 },
     typography: {
       fontFamily: BODY_FONT,
-      h1: { fontFamily: DISPLAY_FONT, fontWeight: 700, letterSpacing: '-0.03em' },
-      h2: { fontFamily: DISPLAY_FONT, fontWeight: 700, letterSpacing: '-0.03em' },
-      h3: { fontFamily: DISPLAY_FONT, fontWeight: 700, letterSpacing: '-0.025em' },
-      h4: { fontFamily: DISPLAY_FONT, fontWeight: 700, letterSpacing: '-0.02em' },
-      h5: { fontFamily: DISPLAY_FONT, fontWeight: 600, letterSpacing: '-0.015em' },
-      h6: { fontFamily: DISPLAY_FONT, fontWeight: 600, letterSpacing: '-0.01em' },
+      h1: { fontFamily: DISPLAY_FONT, fontWeight: 700, letterSpacing: '-0.02em' },
+      h2: { fontFamily: DISPLAY_FONT, fontWeight: 700, letterSpacing: '-0.02em' },
+      h3: { fontFamily: DISPLAY_FONT, fontWeight: 700, letterSpacing: '-0.02em' },
+      h4: { fontFamily: DISPLAY_FONT, fontWeight: 600, letterSpacing: '-0.015em' },
+      h5: { fontFamily: DISPLAY_FONT, fontWeight: 600, letterSpacing: '-0.01em' },
+      h6: { fontFamily: DISPLAY_FONT, fontWeight: 600 },
       subtitle1: { fontWeight: 600 },
       subtitle2: { fontWeight: 600 },
       button: { textTransform: 'none', fontWeight: 700, letterSpacing: '0.01em' },
-      overline: { letterSpacing: '0.16em', fontWeight: 700 },
+      overline: { letterSpacing: '0.14em', fontWeight: 700, fontSize: '0.68rem' },
     },
     components: {
       MuiCssBaseline: {
         styleOverrides: {
           '*::-webkit-scrollbar': { width: 10, height: 10 },
           '*::-webkit-scrollbar-thumb': {
-            backgroundColor: alpha(BRAND.orange, isDark ? 0.45 : 0.35),
+            backgroundColor: alpha(steel, isDark ? 0.5 : 0.4),
             borderRadius: 8,
-            border: `2px solid ${bgDefault}`,
+            border: `2px solid ${canvas}`,
           },
           '*::-webkit-scrollbar-track': { backgroundColor: 'transparent' },
+          // visible keyboard focus everywhere (a11y)
+          'a:focus-visible, button:focus-visible, [role="button"]:focus-visible, .MuiButtonBase-root:focus-visible':
+            { outline: `2px solid ${ember}`, outlineOffset: 2 },
         },
       },
       MuiButton: {
         defaultProps: { disableElevation: true },
         styleOverrides: {
           root: {
-            borderRadius: 12,
-            paddingInline: 18,
-            transition: 'transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .18s ease',
+            borderRadius: 10,
+            paddingInline: 16,
+            transition: 'transform .16s cubic-bezier(.34,1.56,.64,1), box-shadow .16s ease',
             '&:active': { transform: 'scale(0.97)' },
           },
           containedPrimary: {
-            background: `linear-gradient(135deg, ${BRAND.orange}, ${BRAND.orangeDeep})`,
-            boxShadow: `0 8px 22px ${alpha(BRAND.orange, 0.36)}`,
-            '&:hover': { boxShadow: `0 10px 30px ${alpha(BRAND.orange, 0.5)}` },
-            // Ensure disabled buttons actually look disabled (gradient would otherwise win).
+            background: `linear-gradient(135deg, ${BRAND.ember}, ${BRAND.emberDeep})`,
+            boxShadow: `0 6px 18px ${alpha(BRAND.ember, 0.34)}`,
+            '&:hover': { boxShadow: `0 8px 24px ${alpha(BRAND.ember, 0.46)}` },
             '&.Mui-disabled': {
               background: isDark ? alpha('#fff', 0.1) : alpha('#000', 0.08),
-              color: isDark ? alpha('#fff', 0.38) : alpha('#000', 0.32),
+              color: isDark ? alpha('#fff', 0.38) : alpha('#000', 0.3),
               boxShadow: 'none',
             },
           },
+          outlined: { borderColor: line },
         },
       },
       MuiPaper: { styleOverrides: { root: { backgroundImage: 'none' } } },
       MuiCard: {
         styleOverrides: {
           root: {
-            borderRadius: 20,
-            border: `1px solid ${divider}`,
-            backgroundImage: isDark
-              ? `linear-gradient(180deg, ${alpha('#fff', 0.03)}, ${alpha('#fff', 0)})`
-              : `linear-gradient(180deg, ${alpha('#fff', 0.7)}, ${alpha('#fff', 0)})`,
+            borderRadius: 14,
+            border: `1px solid ${line}`,
             boxShadow: isDark
-              ? '0 2px 1px rgba(0,0,0,0.2), 0 18px 40px -24px rgba(0,0,0,0.7)'
-              : '0 2px 1px rgba(180,150,110,0.05), 0 22px 48px -30px rgba(120,90,50,0.35)',
+              ? '0 1px 1px rgba(0,0,0,0.3), 0 12px 28px -20px rgba(0,0,0,0.8)'
+              : '0 1px 1px rgba(20,24,27,0.03), 0 14px 30px -22px rgba(30,40,50,0.28)',
           },
         },
       },
-      MuiChip: { styleOverrides: { root: { fontWeight: 700, borderRadius: 9 } } },
+      MuiChip: { styleOverrides: { root: { fontWeight: 700, borderRadius: 8 } } },
       MuiTextField: { defaultProps: { variant: 'outlined' } },
       MuiOutlinedInput: {
         styleOverrides: {
           root: {
-            borderRadius: 12,
-            backgroundColor: isDark ? alpha('#fff', 0.03) : alpha('#000', 0.015),
+            borderRadius: 10,
+            backgroundColor: isDark ? alpha('#fff', 0.03) : alpha('#14181B', 0.015),
+            '& fieldset': { borderColor: line },
           },
         },
       },
@@ -118,22 +121,37 @@ export function buildTheme(mode: 'light' | 'dark'): Theme {
         styleOverrides: {
           head: {
             fontWeight: 700,
-            fontSize: '0.72rem',
-            letterSpacing: '0.08em',
+            fontSize: '0.7rem',
+            letterSpacing: '0.06em',
             textTransform: 'uppercase',
-            color: textSecondary,
-            borderColor: divider,
+            color: steel,
+            borderColor: line,
+            backgroundColor: surface,
           },
-          root: { borderColor: divider },
+          root: { borderColor: line },
         },
       },
-      MuiDialog: {
-        styleOverrides: { paper: { borderRadius: 24, backgroundImage: 'none' } },
-      },
-      MuiTooltip: {
+      MuiTabs: {
         styleOverrides: {
-          tooltip: { borderRadius: 8, fontWeight: 600, fontSize: '0.74rem' },
+          root: { minHeight: 44 },
+          indicator: { height: 3, borderRadius: 3, backgroundColor: ember },
         },
+      },
+      MuiTab: {
+        styleOverrides: {
+          root: {
+            textTransform: 'none',
+            fontWeight: 600,
+            minHeight: 44,
+            letterSpacing: '0.01em',
+            color: steel,
+            '&.Mui-selected': { color: ink },
+          },
+        },
+      },
+      MuiDialog: { styleOverrides: { paper: { borderRadius: 18, backgroundImage: 'none' } } },
+      MuiTooltip: {
+        styleOverrides: { tooltip: { borderRadius: 8, fontWeight: 600, fontSize: '0.74rem' } },
       },
     },
   });

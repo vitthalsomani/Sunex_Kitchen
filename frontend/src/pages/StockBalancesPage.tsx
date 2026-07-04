@@ -20,6 +20,7 @@ import {
 import HistoryIcon from '@mui/icons-material/History';
 
 import { storeApi } from '../api/endpoints';
+import { tabularSx } from '../theme';
 import type { StockBalance, StockMovement } from '../types';
 
 export default function StockBalancesPage() {
@@ -72,13 +73,13 @@ export default function StockBalancesPage() {
                 <TableCell>{r.item_name}</TableCell>
                 <TableCell>{r.category_name}</TableCell>
                 <TableCell align="right">
-                  <Typography fontWeight={700} color={r.low ? 'warning.main' : 'text.primary'}>
+                  <Typography sx={tabularSx} fontWeight={700} color={r.low ? 'warning.main' : 'text.primary'}>
                     {r.balance}
                   </Typography>
                 </TableCell>
                 <TableCell>{r.unit_name}</TableCell>
-                <TableCell align="right">{r.min_stock ?? '—'}</TableCell>
-                <TableCell align="right">{r.max_stock ?? '—'}</TableCell>
+                <TableCell align="right" sx={tabularSx}>{r.min_stock ?? '—'}</TableCell>
+                <TableCell align="right" sx={tabularSx}>{r.max_stock ?? '—'}</TableCell>
                 <TableCell align="right">
                   <IconButton size="small" onClick={() => openLedger(r)} title="View ledger">
                     <HistoryIcon fontSize="small" />
@@ -119,9 +120,13 @@ export default function StockBalancesPage() {
                   <TableCell>
                     <Chip size="small" label={m.source} />
                   </TableCell>
-                  <TableCell align="right">{m.direction === 'in' ? m.quantity : ''}</TableCell>
-                  <TableCell align="right">{m.direction === 'out' ? m.quantity : ''}</TableCell>
-                  <TableCell align="right">{m.balance_after}</TableCell>
+                  <TableCell align="right" sx={{ ...tabularSx, color: 'success.main' }}>
+                    {m.direction === 'in' ? m.quantity : ''}
+                  </TableCell>
+                  <TableCell align="right" sx={{ ...tabularSx, color: 'error.main' }}>
+                    {m.direction === 'out' ? m.quantity : ''}
+                  </TableCell>
+                  <TableCell align="right" sx={tabularSx}>{m.balance_after}</TableCell>
                 </TableRow>
               ))}
               {ledger.length === 0 && (

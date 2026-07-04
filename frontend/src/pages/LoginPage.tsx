@@ -32,8 +32,8 @@ function KitchenScene() {
       <defs>
         <linearGradient id="potBody" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#fbe7c6" />
-          <stop offset="0.5" stopColor="#f0b756" />
-          <stop offset="1" stopColor="#b9722a" />
+          <stop offset="0.5" stopColor="#F58234" />
+          <stop offset="1" stopColor="#C2540E" />
         </linearGradient>
         <linearGradient id="potRim" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#fff3da" />
@@ -44,8 +44,8 @@ function KitchenScene() {
           <stop offset="1" stopColor="#e6ebf0" />
         </linearGradient>
         <radialGradient id="halo" cx="0.5" cy="0.42" r="0.6">
-          <stop offset="0" stopColor="#ffd57e" stopOpacity="0.55" />
-          <stop offset="1" stopColor="#ffd57e" stopOpacity="0" />
+          <stop offset="0" stopColor="#F5A623" stopOpacity="0.55" />
+          <stop offset="1" stopColor="#F5A623" stopOpacity="0" />
         </radialGradient>
         <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
           <feDropShadow dx="0" dy="10" stdDeviation="14" floodColor="#3a1d05" floodOpacity="0.35" />
@@ -162,8 +162,8 @@ export default function LoginPage() {
         width: '100%',
         display: 'grid',
         gridTemplateColumns: { xs: '1fr', md: '1.05fr 1fr' },
-        bgcolor: '#0e1512',
-        fontFamily: '"Manrope", sans-serif',
+        bgcolor: '#0F1417',
+        fontFamily: '"Hanken Grotesk", sans-serif',
       }}
     >
       {/* ── Left: brand / illustration panel ─────────────────────────── */}
@@ -177,7 +177,7 @@ export default function LoginPage() {
           overflow: 'hidden',
           color: '#fff',
           background:
-            'radial-gradient(120% 120% at 15% 0%, #2a1c10 0%, #18120c 45%, #0e1512 100%)',
+            'radial-gradient(120% 120% at 15% 0%, #1a2027 0%, #12171b 45%, #0F1417 100%)',
         }}
       >
         {/* subtle dotted texture */}
@@ -202,8 +202,8 @@ export default function LoginPage() {
               borderRadius: '11px',
               display: 'grid',
               placeItems: 'center',
-              background: 'linear-gradient(145deg,#f0b756,#b9722a)',
-              boxShadow: '0 6px 18px rgba(240,183,86,0.35)',
+              background: 'linear-gradient(145deg,#F58234,#C2540E)',
+              boxShadow: '0 6px 18px rgba(234,106,30,0.4)',
             }}
           >
             <Box component="svg" viewBox="0 0 24 24" sx={{ width: 22, height: 22 }} aria-hidden>
@@ -215,7 +215,7 @@ export default function LoginPage() {
             </Box>
           </Box>
           <Typography
-            sx={{ fontFamily: '"Bricolage Grotesque", sans-serif', fontWeight: 600, fontSize: 22, letterSpacing: '0.2px' }}
+            sx={{ fontFamily: '"Space Grotesk", sans-serif', fontWeight: 600, fontSize: 22, letterSpacing: '0.2px' }}
           >
             SSPL&nbsp;Kitchen
           </Typography>
@@ -230,7 +230,7 @@ export default function LoginPage() {
         <Box sx={{ position: 'relative', maxWidth: 380 }}>
           <Typography
             sx={{
-              fontFamily: '"Bricolage Grotesque", sans-serif',
+              fontFamily: '"Space Grotesk", sans-serif',
               fontWeight: 500,
               fontSize: 30,
               lineHeight: 1.2,
@@ -255,7 +255,7 @@ export default function LoginPage() {
           alignItems: 'center',
           justifyContent: 'center',
           p: { xs: 3, sm: 6 },
-          bgcolor: '#f7f4ef',
+          bgcolor: '#EDF0F3',
         }}
       >
         <Box sx={{ width: '100%', maxWidth: 380 }}>
@@ -273,7 +273,7 @@ export default function LoginPage() {
                 borderRadius: '10px',
                 display: 'grid',
                 placeItems: 'center',
-                background: 'linear-gradient(145deg,#f0b756,#b9722a)',
+                background: 'linear-gradient(145deg,#F58234,#C2540E)',
               }}
             >
               <Box component="svg" viewBox="0 0 24 24" sx={{ width: 20, height: 20 }} aria-hidden>
@@ -283,23 +283,23 @@ export default function LoginPage() {
                 />
               </Box>
             </Box>
-            <Typography sx={{ fontFamily: '"Bricolage Grotesque", sans-serif', fontWeight: 600, fontSize: 19 }}>
+            <Typography sx={{ fontFamily: '"Space Grotesk", sans-serif', fontWeight: 600, fontSize: 19 }}>
               SSPL Kitchen
             </Typography>
           </Stack>
 
           <Typography
             sx={{
-              fontFamily: '"Bricolage Grotesque", sans-serif',
+              fontFamily: '"Space Grotesk", sans-serif',
               fontWeight: 600,
               fontSize: 30,
-              color: '#1b2420',
+              color: '#14181B',
               mb: 0.5,
             }}
           >
             Welcome back
           </Typography>
-          <Typography sx={{ color: '#6c7771', fontSize: 14.5, mb: 4 }}>
+          <Typography sx={{ color: '#64707A', fontSize: 14.5, mb: 4 }}>
             Sign in to manage the mess operations.
           </Typography>
 
@@ -315,7 +315,7 @@ export default function LoginPage() {
                 <Typography
                   component="label"
                   htmlFor="username"
-                  sx={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#46514c', mb: 0.75 }}
+                  sx={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#64707A', mb: 0.75 }}
                 >
                   Username
                 </Typography>
@@ -330,7 +330,7 @@ export default function LoginPage() {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <PersonOutlineRoundedIcon sx={{ fontSize: 20, color: '#9aa39e' }} />
+                        <PersonOutlineRoundedIcon sx={{ fontSize: 20, color: '#64707A' }} />
                       </InputAdornment>
                     ),
                   }}
@@ -342,7 +342,7 @@ export default function LoginPage() {
                 <Typography
                   component="label"
                   htmlFor="password"
-                  sx={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#46514c', mb: 0.75 }}
+                  sx={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#64707A', mb: 0.75 }}
                 >
                   Password
                 </Typography>
@@ -357,7 +357,7 @@ export default function LoginPage() {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <LockOutlinedIcon sx={{ fontSize: 20, color: '#9aa39e' }} />
+                        <LockOutlinedIcon sx={{ fontSize: 20, color: '#64707A' }} />
                       </InputAdornment>
                     ),
                   }}
@@ -384,12 +384,12 @@ export default function LoginPage() {
                   fontSize: 15.5,
                   fontWeight: 600,
                   color: '#fff',
-                  background: 'linear-gradient(135deg,#E8852C,#C96E1B)',
-                  boxShadow: '0 10px 24px rgba(232,133,44,0.38)',
+                  background: 'linear-gradient(135deg,#EA6A1E,#C2540E)',
+                  boxShadow: '0 10px 24px rgba(234,106,30,0.38)',
                   transition: 'transform .15s ease, box-shadow .15s ease',
                   '&:hover': {
-                    background: 'linear-gradient(135deg,#F4A65A,#C96E1B)',
-                    boxShadow: '0 12px 30px rgba(232,133,44,0.5)',
+                    background: 'linear-gradient(135deg,#F58234,#C2540E)',
+                    boxShadow: '0 12px 30px rgba(234,106,30,0.5)',
                     transform: 'translateY(-1px)',
                   },
                   '&.Mui-disabled': { color: 'rgba(255,255,255,0.8)', opacity: 0.7 },
@@ -400,7 +400,7 @@ export default function LoginPage() {
             </Stack>
           </form>
 
-          <Typography sx={{ mt: 4, fontSize: 12.5, color: '#9aa39e', textAlign: 'center' }}>
+          <Typography sx={{ mt: 4, fontSize: 12.5, color: '#64707A', textAlign: 'center' }}>
             SSPL Kitchen · Factory Mess Management
           </Typography>
         </Box>
@@ -414,9 +414,9 @@ const fieldSx = {
     borderRadius: 2,
     bgcolor: '#fff',
     fontSize: 15,
-    '& fieldset': { borderColor: '#e2ddd3' },
-    '&:hover fieldset': { borderColor: '#c9c2b4' },
-    '&.Mui-focused fieldset': { borderColor: '#E8852C', borderWidth: 2 },
+    '& fieldset': { borderColor: '#D6DCE1' },
+    '&:hover fieldset': { borderColor: '#B8C0C8' },
+    '&.Mui-focused fieldset': { borderColor: '#EA6A1E', borderWidth: 2 },
   },
   '& .MuiOutlinedInput-input': { py: 1.4 },
 } as const;

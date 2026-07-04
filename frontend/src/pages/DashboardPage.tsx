@@ -18,6 +18,7 @@ import dayjs from 'dayjs';
 
 import { analyticsApi } from '../api/endpoints';
 import { PageHeader, Stagger, Item } from '../components/ui';
+import { tabularSx } from '../theme';
 import type { Dashboard, SeriesPoint } from '../types';
 
 const inr = (n: number) => '₹' + n.toLocaleString('en-IN', { maximumFractionDigits: 0 });
@@ -30,7 +31,7 @@ function Kpi({ label, value, accent }: { label: string; value: string; accent?: 
         <Typography variant="body2" color="text.secondary" gutterBottom>
           {label}
         </Typography>
-        <Typography variant="h5" fontWeight={800} color={accent ? 'primary.main' : 'text.primary'}>
+        <Typography variant="h5" fontWeight={700} sx={tabularSx} color={accent ? 'primary.main' : 'text.primary'}>
           {value}
         </Typography>
       </CardContent>
@@ -125,7 +126,9 @@ export default function DashboardPage() {
                 {top.map((t) => (
                   <TableRow key={t.label}>
                     <TableCell>{t.label}</TableCell>
-                    <TableCell align="right">{num(t.value)}</TableCell>
+                    <TableCell align="right" sx={tabularSx}>
+                      {num(t.value)}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>

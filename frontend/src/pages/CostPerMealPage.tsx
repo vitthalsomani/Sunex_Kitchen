@@ -19,6 +19,7 @@ import dayjs from 'dayjs';
 
 import { analyticsApi } from '../api/endpoints';
 import { downloadCsv } from '../api/download';
+import { tabularSx } from '../theme';
 import type { CostPerMealRow } from '../types';
 
 const inr = (n: number) => '₹' + n.toLocaleString('en-IN', { maximumFractionDigits: 2 });
@@ -78,15 +79,15 @@ export default function CostPerMealPage() {
           <TableBody>
             {rows.map((r) => (
               <TableRow key={r.month} hover>
-                <TableCell>{r.month}</TableCell>
-                <TableCell align="right">{r.meals.toLocaleString('en-IN')}</TableCell>
-                <TableCell align="right">{inr(r.food_cost)}</TableCell>
+                <TableCell sx={tabularSx}>{r.month}</TableCell>
+                <TableCell align="right" sx={tabularSx}>{r.meals.toLocaleString('en-IN')}</TableCell>
+                <TableCell align="right" sx={tabularSx}>{inr(r.food_cost)}</TableCell>
                 <TableCell align="right">
-                  <Typography fontWeight={700} color="primary.main">
+                  <Typography sx={tabularSx} fontWeight={700} color="primary.main">
                     {inr(r.cost_per_meal)}
                   </Typography>
                 </TableCell>
-                <TableCell align="right">{inr(r.purchases_value)}</TableCell>
+                <TableCell align="right" sx={tabularSx}>{inr(r.purchases_value)}</TableCell>
               </TableRow>
             ))}
           </TableBody>

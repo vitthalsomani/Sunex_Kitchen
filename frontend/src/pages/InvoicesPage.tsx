@@ -27,6 +27,7 @@ import dayjs from 'dayjs';
 
 import { invoicesApi, itemsApi, uploadsApi, vendorsApi } from '../api/endpoints';
 import { useAuth } from '../context/AuthContext';
+import { tabularSx } from '../theme';
 import type { Item, PurchaseInvoice, Vendor } from '../types';
 
 const inr = (n: number) => '₹' + n.toLocaleString('en-IN', { maximumFractionDigits: 2 });
@@ -130,12 +131,12 @@ export default function InvoicesPage() {
           <TableBody>
             {rows.map((inv) => (
               <TableRow key={inv.id} hover>
-                <TableCell>{dayjs(inv.invoice_date).format('DD MMM YYYY')}</TableCell>
+                <TableCell sx={tabularSx}>{dayjs(inv.invoice_date).format('DD MMM YYYY')}</TableCell>
                 <TableCell>{inv.vendor_name}</TableCell>
-                <TableCell>{inv.invoice_number}</TableCell>
-                <TableCell align="right">{inv.lines.length}</TableCell>
+                <TableCell sx={tabularSx}>{inv.invoice_number}</TableCell>
+                <TableCell align="right" sx={tabularSx}>{inv.lines.length}</TableCell>
                 <TableCell align="right">
-                  <Typography fontWeight={700}>{inr(inv.total)}</Typography>
+                  <Typography sx={tabularSx} fontWeight={700}>{inr(inv.total)}</Typography>
                 </TableCell>
               </TableRow>
             ))}

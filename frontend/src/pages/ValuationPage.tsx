@@ -18,6 +18,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 
 import { storeApi } from '../api/endpoints';
 import { api } from '../api/client';
+import { tabularSx } from '../theme';
 import type { Valuation } from '../types';
 
 const inr = (n: number) => '₹' + n.toLocaleString('en-IN', { maximumFractionDigits: 2 });
@@ -65,7 +66,7 @@ export default function ValuationPage() {
             <Typography variant="body2" color="text.secondary">
               Total Stock Value
             </Typography>
-            <Typography variant="h5" fontWeight={800} color="primary.main">
+            <Typography variant="h5" fontWeight={700} sx={tabularSx} color="primary.main">
               {inr(total)}
             </Typography>
           </Box>
@@ -73,7 +74,7 @@ export default function ValuationPage() {
             <Typography variant="body2" color="text.secondary">
               Items Valued
             </Typography>
-            <Typography variant="h5" fontWeight={800}>
+            <Typography variant="h5" fontWeight={700} sx={tabularSx}>
               {valuedCount} / {rows.filter((r) => r.balance > 0).length}
             </Typography>
           </Box>
@@ -95,13 +96,21 @@ export default function ValuationPage() {
             {filtered.map((r) => (
               <TableRow key={r.item_id} hover>
                 <TableCell>{r.item_name}</TableCell>
-                <TableCell align="right">
+                <TableCell align="right" sx={tabularSx}>
                   {r.balance} {r.unit_name}
                 </TableCell>
-                <TableCell align="right">{r.costed_qty}</TableCell>
-                <TableCell align="right">{r.avg_cost ? inr(r.avg_cost) : '—'}</TableCell>
+                <TableCell align="right" sx={tabularSx}>
+                  {r.costed_qty}
+                </TableCell>
+                <TableCell align="right" sx={tabularSx}>
+                  {r.avg_cost ? inr(r.avg_cost) : '—'}
+                </TableCell>
                 <TableCell align="right">
-                  <Typography fontWeight={r.value ? 700 : 400} color={r.value ? 'text.primary' : 'text.secondary'}>
+                  <Typography
+                    sx={tabularSx}
+                    fontWeight={r.value ? 700 : 400}
+                    color={r.value ? 'text.primary' : 'text.secondary'}
+                  >
                     {r.value ? inr(r.value) : '—'}
                   </Typography>
                 </TableCell>
@@ -114,7 +123,7 @@ export default function ValuationPage() {
                 <Typography fontWeight={700}>Total</Typography>
               </TableCell>
               <TableCell align="right">
-                <Typography fontWeight={800} color="primary.main">
+                <Typography sx={tabularSx} fontWeight={700} color="primary.main">
                   {inr(total)}
                 </Typography>
               </TableCell>

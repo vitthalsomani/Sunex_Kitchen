@@ -20,6 +20,7 @@ import dayjs from 'dayjs';
 
 import { analyticsApi } from '../api/endpoints';
 import { downloadCsv } from '../api/download';
+import { tabularSx } from '../theme';
 import type { ContractorChargeRow } from '../types';
 
 const inr = (n: number) => '₹' + n.toLocaleString('en-IN', { maximumFractionDigits: 2 });
@@ -78,10 +79,10 @@ export default function ContractorChargesPage() {
             {rows.map((r) => (
               <TableRow key={r.consumer_id} hover>
                 <TableCell>{r.consumer_name}</TableCell>
-                <TableCell align="right">{r.meals.toLocaleString('en-IN')}</TableCell>
-                <TableCell align="right">{inr(r.meal_rate)}</TableCell>
+                <TableCell align="right" sx={tabularSx}>{r.meals.toLocaleString('en-IN')}</TableCell>
+                <TableCell align="right" sx={tabularSx}>{inr(r.meal_rate)}</TableCell>
                 <TableCell align="right">
-                  <Typography fontWeight={700}>{inr(r.amount)}</Typography>
+                  <Typography sx={tabularSx} fontWeight={700}>{inr(r.amount)}</Typography>
                 </TableCell>
               </TableRow>
             ))}
@@ -93,7 +94,7 @@ export default function ContractorChargesPage() {
                   <Typography fontWeight={700}>Total to back-charge</Typography>
                 </TableCell>
                 <TableCell align="right">
-                  <Typography fontWeight={800} color="primary.main">
+                  <Typography sx={tabularSx} fontWeight={700} color="primary.main">
                     {inr(total)}
                   </Typography>
                 </TableCell>
