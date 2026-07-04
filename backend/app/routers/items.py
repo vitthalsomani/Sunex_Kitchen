@@ -43,6 +43,8 @@ async def create_item(payload: ItemCreate, _: Annotated[CurrentUser, Depends(req
         "name": payload.name,
         "category_id": to_object_id(payload.category_id),
         "unit_id": to_object_id(payload.unit_id),
+        "min_stock": payload.min_stock,
+        "max_stock": payload.max_stock,
         "active": payload.active,
     }
     try:

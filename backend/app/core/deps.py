@@ -7,7 +7,15 @@ from app.core.security import decode_token
 
 oauth2 = OAuth2PasswordBearer(tokenUrl="/api/auth/login")
 
-ROLES = ("admin", "data_entry", "viewer")
+# 6-role RBAC (architecture §17)
+ROLES = (
+    "admin",
+    "store_manager",
+    "purchase",
+    "canteen_incharge",
+    "data_entry",
+    "viewer",
+)
 
 
 class CurrentUser:
@@ -38,5 +46,14 @@ def require_roles(*allowed: str):
 
 
 require_admin = require_roles("admin")
-require_entry = require_roles("admin", "data_entry")
-require_any = require_roles("admin", "data_entry", "viewer")
+require_any = require_roles(*ROLES)  # any authenticated user may read
+
+# Write guards per the §17 permission matrix. `data_entry` may create in every
+# transactional area; specialist roles write their own area; deletes are admin-only.
+require_master_write = require_roles("admin", "store_manager")
+require_store_write = require_roles("admin", "store_manager", "data_entry")
+require_purchase_write = require_roles("admin", "purchase", "data_entry")
+require_consumption_write = require_roles("admin", "canteen_incharge", "data_entry")
+
+# Backwards-compatible alias used by existing routers (generic data-entry write).
+require_entry = require_roles("admin", "data_entry", "store_manager", "canteen_incharge", "purchase")

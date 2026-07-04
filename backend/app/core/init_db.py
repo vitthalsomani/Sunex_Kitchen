@@ -16,6 +16,23 @@ async def ensure_indexes() -> None:
     await db.monthly_stock.create_index([("month", 1), ("item_id", 1)], unique=True)
     await db.monthly_expenses.create_index("month", unique=True)
 
+    # --- ERP redesign masters ---
+    await db.vendors.create_index("name", unique=True)
+    await db.canteens.create_index("name", unique=True)
+    await db.consumers.create_index("name", unique=True)
+    await db.item_aliases.create_index("alias", unique=True)
+    await db.item_aliases.create_index("item_id")
+    await db.staff.create_index("canteen_id")
+
+    # --- ERP redesign transactions (indexes ready ahead of routers) ---
+    await db.stock_ledger.create_index([("item_id", 1), ("date", 1)])
+    await db.cost_layers.create_index([("item_id", 1), ("in_date", 1)])
+    await db.purchase_invoices.create_index([("invoice_date", 1), ("vendor_id", 1)])
+    await db.outward.create_index([("date", 1), ("canteen_id", 1)])
+    # Consumption is per (date, shift) — the Mess sheet has no canteen split.
+    await db.consumption.create_index([("date", 1), ("shift", 1)], unique=True)
+    await db.audit_log.create_index([("ts", -1)])
+
 
 async def ensure_admin() -> None:
     db = get_db()
