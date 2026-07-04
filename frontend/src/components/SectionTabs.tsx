@@ -27,9 +27,7 @@ export default function SectionTabs() {
         position: 'sticky',
         top: TOPBAR_H,
         zIndex: (t) => t.zIndex.appBar - 1,
-        backdropFilter: 'blur(10px)',
-        backgroundColor: (t) =>
-          t.palette.mode === 'dark' ? 'rgba(15,20,23,0.82)' : 'rgba(237,240,243,0.82)',
+        backgroundColor: 'background.default',
         borderBottom: (t) => `1px solid ${t.palette.divider}`,
         px: { xs: 1, md: 3 },
       }}

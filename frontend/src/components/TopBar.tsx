@@ -43,9 +43,7 @@ export default function TopBar() {
       sx={{
         height: TOPBAR_H,
         justifyContent: 'center',
-        backdropFilter: 'blur(10px)',
-        backgroundColor: (t) =>
-          t.palette.mode === 'dark' ? 'rgba(23,29,34,0.78)' : 'rgba(255,255,255,0.78)',
+        backgroundColor: 'background.paper',
         borderBottom: (t) => `1px solid ${t.palette.divider}`,
       }}
     >
