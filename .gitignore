@@ -37,3 +37,12 @@ docker-compose.override.yml
 # Playwright
 playwright-report/
 test-results/
+
+# uploaded invoice photos
+backend/uploads/
+
+# raw operational data workbook (contains real names/vendors) — keep out of git
+*.xlsx
+
+# TS build info
+*.tsbuildinfo
