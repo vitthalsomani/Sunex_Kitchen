@@ -1,0 +1,96 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Fine film-grain overlay for depth — sits above the gradient, below content. */
+.sunex-grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: soft-light;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+
+/* ---- Animated login mark ---- */
+.mark-spin,
+.mark-orbit,
+.mark-ping,
+.mark-bob {
+  transform-box: view-box;
+  transform-origin: 100px 100px;
+}
+.mark-spin {
+  animation: sunex-spin 5s linear infinite;
+}
+.mark-orbit {
+  animation: sunex-spin 9s linear infinite;
+}
+.mark-orbit-rev {
+  animation-duration: 13s;
+  animation-direction: reverse;
+}
+.mark-orbit-slow {
+  animation-duration: 18s;
+}
+.mark-ping {
+  animation: sunex-ping 3.2s ease-out infinite;
+}
+.mark-ping-2 {
+  animation-delay: 1.6s;
+}
+.mark-bob {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: sunex-bob 3s ease-in-out infinite;
+}
+
+@keyframes sunex-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes sunex-ping {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+@keyframes sunex-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

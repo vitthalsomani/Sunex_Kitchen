@@ -163,7 +163,7 @@ export default function LoginPage() {
         display: 'grid',
         gridTemplateColumns: { xs: '1fr', md: '1.05fr 1fr' },
         bgcolor: '#0e1512',
-        fontFamily: '"Inter", sans-serif',
+        fontFamily: '"Manrope", sans-serif',
       }}
     >
       {/* ── Left: brand / illustration panel ─────────────────────────── */}
@@ -215,7 +215,7 @@ export default function LoginPage() {
             </Box>
           </Box>
           <Typography
-            sx={{ fontFamily: '"Fraunces", serif', fontWeight: 600, fontSize: 22, letterSpacing: '0.2px' }}
+            sx={{ fontFamily: '"Bricolage Grotesque", sans-serif', fontWeight: 600, fontSize: 22, letterSpacing: '0.2px' }}
           >
             SSPL&nbsp;Kitchen
           </Typography>
@@ -230,7 +230,7 @@ export default function LoginPage() {
         <Box sx={{ position: 'relative', maxWidth: 380 }}>
           <Typography
             sx={{
-              fontFamily: '"Fraunces", serif',
+              fontFamily: '"Bricolage Grotesque", sans-serif',
               fontWeight: 500,
               fontSize: 30,
               lineHeight: 1.2,
@@ -283,14 +283,14 @@ export default function LoginPage() {
                 />
               </Box>
             </Box>
-            <Typography sx={{ fontFamily: '"Fraunces", serif', fontWeight: 600, fontSize: 19 }}>
+            <Typography sx={{ fontFamily: '"Bricolage Grotesque", sans-serif', fontWeight: 600, fontSize: 19 }}>
               SSPL Kitchen
             </Typography>
           </Stack>
 
           <Typography
             sx={{
-              fontFamily: '"Fraunces", serif',
+              fontFamily: '"Bricolage Grotesque", sans-serif',
               fontWeight: 600,
               fontSize: 30,
               color: '#1b2420',
@@ -384,12 +384,12 @@ export default function LoginPage() {
                   fontSize: 15.5,
                   fontWeight: 600,
                   color: '#fff',
-                  background: 'linear-gradient(145deg,#1565c0,#0f4c93)',
-                  boxShadow: '0 10px 22px rgba(21,101,192,0.32)',
+                  background: 'linear-gradient(135deg,#E8852C,#C96E1B)',
+                  boxShadow: '0 10px 24px rgba(232,133,44,0.38)',
                   transition: 'transform .15s ease, box-shadow .15s ease',
                   '&:hover': {
-                    background: 'linear-gradient(145deg,#1769cf,#0f4c93)',
-                    boxShadow: '0 12px 26px rgba(21,101,192,0.42)',
+                    background: 'linear-gradient(135deg,#F4A65A,#C96E1B)',
+                    boxShadow: '0 12px 30px rgba(232,133,44,0.5)',
                     transform: 'translateY(-1px)',
                   },
                   '&.Mui-disabled': { color: 'rgba(255,255,255,0.8)', opacity: 0.7 },
@@ -416,7 +416,7 @@ const fieldSx = {
     fontSize: 15,
     '& fieldset': { borderColor: '#e2ddd3' },
     '&:hover fieldset': { borderColor: '#c9c2b4' },
-    '&.Mui-focused fieldset': { borderColor: '#1565c0', borderWidth: 2 },
+    '&.Mui-focused fieldset': { borderColor: '#E8852C', borderWidth: 2 },
   },
   '& .MuiOutlinedInput-input': { py: 1.4 },
 } as const;

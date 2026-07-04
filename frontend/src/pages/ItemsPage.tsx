@@ -40,6 +40,8 @@ export default function ItemsPage() {
   const [name, setName] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [unitId, setUnitId] = useState('');
+  const [minStock, setMinStock] = useState('');
+  const [maxStock, setMaxStock] = useState('');
   const [active, setActive] = useState(true);
 
   const reload = async () => {
@@ -58,6 +60,8 @@ export default function ItemsPage() {
     setName('');
     setCategoryId('');
     setUnitId('');
+    setMinStock('');
+    setMaxStock('');
     setActive(true);
     setOpen(true);
   };
@@ -66,16 +70,23 @@ export default function ItemsPage() {
     setName(it.name);
     setCategoryId(it.category_id);
     setUnitId(it.unit_id);
+    setMinStock(it.min_stock != null ? String(it.min_stock) : '');
+    setMaxStock(it.max_stock != null ? String(it.max_stock) : '');
     setActive(it.active);
     setOpen(true);
   };
 
   const save = async () => {
-    if (editing) {
-      await itemsApi.update(editing.id, { name, category_id: categoryId, unit_id: unitId, active });
-    } else {
-      await itemsApi.create({ name, category_id: categoryId, unit_id: unitId, active });
-    }
+    const p = {
+      name,
+      category_id: categoryId,
+      unit_id: unitId,
+      min_stock: minStock === '' ? null : Number(minStock),
+      max_stock: maxStock === '' ? null : Number(maxStock),
+      active,
+    };
+    if (editing) await itemsApi.update(editing.id, p);
+    else await itemsApi.create(p);
     setOpen(false);
     await reload();
   };
@@ -105,6 +116,8 @@ export default function ItemsPage() {
               <TableCell>Name</TableCell>
               <TableCell>Category</TableCell>
               <TableCell>Unit</TableCell>
+              <TableCell align="right">Min</TableCell>
+              <TableCell align="right">Max</TableCell>
               <TableCell>Active</TableCell>
               {canEdit && <TableCell align="right">Actions</TableCell>}
             </TableRow>
@@ -115,6 +128,8 @@ export default function ItemsPage() {
                 <TableCell>{it.name}</TableCell>
                 <TableCell>{it.category_name}</TableCell>
                 <TableCell>{it.unit_name}</TableCell>
+                <TableCell align="right">{it.min_stock ?? '—'}</TableCell>
+                <TableCell align="right">{it.max_stock ?? '—'}</TableCell>
                 <TableCell>{it.active ? 'Yes' : 'No'}</TableCell>
                 {canEdit && (
                   <TableCell align="right">
@@ -130,7 +145,7 @@ export default function ItemsPage() {
             ))}
             {items.length === 0 && (
               <TableRow>
-                <TableCell colSpan={canEdit ? 5 : 4} align="center">
+                <TableCell colSpan={canEdit ? 7 : 6} align="center">
                   <Box py={3}>
                     <Typography color="text.secondary">No items yet. Add a category + unit first.</Typography>
                   </Box>
@@ -172,6 +187,22 @@ export default function ItemsPage() {
                 </MenuItem>
               ))}
             </TextField>
+            <Stack direction="row" spacing={2}>
+              <TextField
+                label="Min stock (reorder)"
+                type="number"
+                value={minStock}
+                onChange={(e) => setMinStock(e.target.value)}
+                fullWidth
+              />
+              <TextField
+                label="Max stock"
+                type="number"
+                value={maxStock}
+                onChange={(e) => setMaxStock(e.target.value)}
+                fullWidth
+              />
+            </Stack>
             <Stack direction="row" alignItems="center" spacing={1}>
               <Switch checked={active} onChange={(e) => setActive(e.target.checked)} />
               <Typography>Active</Typography>
