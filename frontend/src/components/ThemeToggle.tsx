@@ -76,6 +76,7 @@ export default function ThemeToggle() {
                 cy={H / 2 - 3}
                 r={THUMB_R - 1}
                 fill="black"
+                initial={false}
                 animate={{ cx: dark ? POS_DARK + 5 : POS_DARK + THUMB_R + 8 }}
                 transition={spring}
               />
@@ -145,6 +146,7 @@ export default function ThemeToggle() {
             cy={H / 2}
             r={THUMB_R}
             fill="url(#tt-sun)"
+            initial={false}
             animate={{ cx: dark ? POS_DARK : POS_LIGHT }}
             transition={spring}
           />
@@ -153,6 +155,7 @@ export default function ThemeToggle() {
             r={THUMB_R}
             fill="url(#tt-moon)"
             mask="url(#tt-moon-mask)"
+            initial={false}
             animate={{ cx: dark ? POS_DARK : POS_LIGHT, opacity: dark ? 1 : 0 }}
             transition={spring}
           />
