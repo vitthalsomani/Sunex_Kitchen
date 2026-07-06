@@ -86,12 +86,12 @@ export default function OutwardPage() {
     <>
       <Stack direction="row" alignItems="center" mb={2} spacing={2}>
         <Typography variant="h4" fontWeight={800} sx={{ flexGrow: 1 }}>
-          Issue / Outward
+          Items Given Out
         </Typography>
         <TextField label="Month" size="small" value={month} onChange={(e) => setMonth(e.target.value)} />
         {canEdit && (
           <Button variant="contained" startIcon={<AddIcon />} onClick={() => { setErr(null); setOpen(true); }}>
-            New Issue
+            Give Out Items
           </Button>
         )}
       </Stack>
@@ -102,9 +102,9 @@ export default function OutwardPage() {
             <TableRow>
               <TableCell>Date</TableCell>
               <TableCell>Canteen</TableCell>
-              <TableCell>Issued By</TableCell>
+              <TableCell>Given By</TableCell>
               <TableCell align="right">Items</TableCell>
-              <TableCell align="right">FIFO Cost</TableCell>
+              <TableCell align="right">Cost</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -121,7 +121,7 @@ export default function OutwardPage() {
               <TableRow>
                 <TableCell colSpan={5} align="center">
                   <Typography color="text.secondary" py={3}>
-                    No issues this month.
+                    Nothing given out this month.
                   </Typography>
                 </TableCell>
               </TableRow>
@@ -131,7 +131,7 @@ export default function OutwardPage() {
       </TableContainer>
 
       <Dialog open={open} onClose={() => setOpen(false)} maxWidth="sm" fullWidth>
-        <DialogTitle>New Issue</DialogTitle>
+        <DialogTitle>Give Out Items</DialogTitle>
         <DialogContent>
           {err && (
             <Alert severity="error" sx={{ mb: 2 }}>
@@ -162,7 +162,7 @@ export default function OutwardPage() {
                 ))}
               </TextField>
               <TextField
-                label="Issued By"
+                label="Given By"
                 value={form.issued_by}
                 onChange={(e) => setForm({ ...form, issued_by: e.target.value })}
               />
@@ -205,7 +205,7 @@ export default function OutwardPage() {
         <DialogActions>
           <Button onClick={() => setOpen(false)}>Cancel</Button>
           <Button variant="contained" onClick={save}>
-            Issue Stock
+            Give Out
           </Button>
         </DialogActions>
       </Dialog>

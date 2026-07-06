@@ -48,9 +48,9 @@ export default function StockBalancesPage() {
     <>
       <Stack direction="row" alignItems="center" mb={2} spacing={2}>
         <Typography variant="h4" fontWeight={800} sx={{ flexGrow: 1 }}>
-          Stock Balances
+          Current Stock
         </Typography>
-        {lowCount > 0 && <Chip color="warning" label={`${lowCount} below min`} />}
+        {lowCount > 0 && <Chip color="warning" label={`${lowCount} running low`} />}
         <TextField size="small" placeholder="Search item…" value={q} onChange={(e) => setQ(e.target.value)} />
       </Stack>
 
@@ -64,7 +64,7 @@ export default function StockBalancesPage() {
               <TableCell>Unit</TableCell>
               <TableCell align="right">Min</TableCell>
               <TableCell align="right">Max</TableCell>
-              <TableCell align="right">Ledger</TableCell>
+              <TableCell align="right">History</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -81,7 +81,7 @@ export default function StockBalancesPage() {
                 <TableCell align="right" sx={tabularSx}>{r.min_stock ?? '—'}</TableCell>
                 <TableCell align="right" sx={tabularSx}>{r.max_stock ?? '—'}</TableCell>
                 <TableCell align="right">
-                  <IconButton size="small" onClick={() => openLedger(r)} title="View ledger">
+                  <IconButton size="small" onClick={() => openLedger(r)} title="View history">
                     <HistoryIcon fontSize="small" />
                   </IconButton>
                 </TableCell>
@@ -101,7 +101,7 @@ export default function StockBalancesPage() {
       </TableContainer>
 
       <Dialog open={!!ledgerItem} onClose={() => setLedgerItem(null)} maxWidth="sm" fullWidth>
-        <DialogTitle>Ledger — {ledgerItem?.item_name}</DialogTitle>
+        <DialogTitle>History — {ledgerItem?.item_name}</DialogTitle>
         <DialogContent>
           <Table size="small">
             <TableHead>

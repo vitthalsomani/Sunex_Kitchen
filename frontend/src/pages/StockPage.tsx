@@ -104,7 +104,7 @@ export default function StockPage() {
     <>
       <Stack direction="row" alignItems="center" mb={2} spacing={2}>
         <Typography variant="h4" sx={{ flexGrow: 1 }}>
-          Monthly Stock
+          Monthly Stock Count
         </Typography>
         <TextField
           type="month"
@@ -138,8 +138,8 @@ export default function StockPage() {
               <TableCell align="right">Purchases Value</TableCell>
               <TableCell align="right">Closing Qty</TableCell>
               <TableCell align="right">Closing Value</TableCell>
-              <TableCell align="right">Consumption Qty</TableCell>
-              <TableCell align="right">Consumption Value</TableCell>
+              <TableCell align="right">Used Qty</TableCell>
+              <TableCell align="right">Used Value</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

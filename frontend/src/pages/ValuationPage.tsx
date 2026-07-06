@@ -52,7 +52,7 @@ export default function ValuationPage() {
     <>
       <Stack direction="row" alignItems="center" mb={2} spacing={2}>
         <Typography variant="h4" fontWeight={800} sx={{ flexGrow: 1 }}>
-          Stock Valuation (FIFO)
+          Stock Value
         </Typography>
         <TextField size="small" placeholder="Search item…" value={q} onChange={(e) => setQ(e.target.value)} />
         <Button variant="outlined" startIcon={<DownloadIcon />} onClick={download}>
@@ -72,7 +72,7 @@ export default function ValuationPage() {
           </Box>
           <Box>
             <Typography variant="body2" color="text.secondary">
-              Items Valued
+              Items Priced
             </Typography>
             <Typography variant="h5" fontWeight={700} sx={tabularSx}>
               {valuedCount} / {rows.filter((r) => r.balance > 0).length}
@@ -87,7 +87,7 @@ export default function ValuationPage() {
             <TableRow>
               <TableCell>Item</TableCell>
               <TableCell align="right">Balance</TableCell>
-              <TableCell align="right">Costed Qty</TableCell>
+              <TableCell align="right">Priced Qty</TableCell>
               <TableCell align="right">Avg Cost</TableCell>
               <TableCell align="right">Value</TableCell>
             </TableRow>

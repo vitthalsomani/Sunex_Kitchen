@@ -21,14 +21,14 @@ export default function StaffPage() {
 
   return (
     <>
-      <PageHeader overline="Masters" title="Canteen Staff" />
+      <PageHeader overline="Master" title="Canteen Staff" />
       <TableContainer component={Paper}>
         <Table size="small">
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Canteen</TableCell>
-              <TableCell>Occupation</TableCell>
+              <TableCell>Job</TableCell>
               <TableCell>Shift Time</TableCell>
               <TableCell>Rest Time</TableCell>
             </TableRow>

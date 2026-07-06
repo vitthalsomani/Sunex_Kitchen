@@ -51,9 +51,9 @@ export default function CostPerMealPage() {
         </Button>
       </Stack>
       <Alert severity="info" sx={{ mb: 2 }}>
-        Food cost is the FIFO cost of stock <b>issued</b> that month. Historical issues carry no cost
-        (legacy receipts had no rates), so past cost-per-meal shows ₹0 — real figures accrue as
-        invoices → issues flow through the new system.
+        Food cost is the cost of stock <b>given out</b> that month. Older records have no cost saved,
+        so past cost-per-meal shows ₹0 — real figures build up as bills and stock hand-outs flow
+        through the new system.
       </Alert>
       <Stack direction="row" spacing={2} mb={2} alignItems="center">
         <TextField label="From (YYYY-MM)" size="small" value={from} onChange={(e) => setFrom(e.target.value)} />

@@ -78,21 +78,21 @@ export default function DashboardPage() {
 
   const cards = [
     { label: 'Stock Value', value: inr(k?.stock_value ?? 0), accent: true },
-    { label: 'Items Below Min', value: num(k?.items_below_min ?? 0) },
+    { label: 'Items Running Low', value: num(k?.items_below_min ?? 0) },
     { label: 'Meals This Month', value: num(k?.meals_mtd ?? 0) },
     { label: 'Meals Today', value: num(k?.meals_today ?? 0) },
-    { label: 'Purchases MTD', value: inr(k?.purchases_mtd_value ?? 0) },
-    { label: 'Food Cost MTD', value: inr(k?.food_cost_mtd ?? 0) },
-    { label: 'Cost / Meal MTD', value: inr(k?.cost_per_meal_mtd ?? 0), accent: true },
-    { label: 'Invoices MTD', value: num(k?.invoices_mtd ?? 0) },
+    { label: 'Purchases (This Month)', value: inr(k?.purchases_mtd_value ?? 0) },
+    { label: 'Food Cost (This Month)', value: inr(k?.food_cost_mtd ?? 0) },
+    { label: 'Cost per Meal (This Month)', value: inr(k?.cost_per_meal_mtd ?? 0), accent: true },
+    { label: 'Bills (This Month)', value: num(k?.invoices_mtd ?? 0) },
   ];
 
   return (
     <>
       <PageHeader
         overline="Overview"
-        title="Dashboard"
-        subtitle={`${month} · live from the stock ledger, purchases & consumption`}
+        title="Home"
+        subtitle={`${month} · updated live from your stock, purchases & meals`}
       />
 
       <Stagger>
@@ -119,7 +119,7 @@ export default function DashboardPage() {
         <Grid item xs={12} md={4}>
           <Paper sx={{ p: 2, height: '100%' }}>
             <Typography variant="h6" fontWeight={700} gutterBottom>
-              Top Consumed Items
+              Most Used Items
             </Typography>
             <Table size="small">
               <TableBody>
@@ -190,7 +190,7 @@ export default function DashboardPage() {
                 ))}
               </Stack>
             ) : (
-              <Typography color="text.secondary">No recent purchases or issues yet.</Typography>
+              <Typography color="text.secondary">No recent purchases or stock given out yet.</Typography>
             )}
           </Paper>
         </Grid>

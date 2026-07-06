@@ -52,7 +52,7 @@ export default function VendorsPage() {
     reload();
   };
   const remove = async (id: string) => {
-    if (window.confirm('Delete vendor?')) {
+    if (window.confirm('Delete supplier?')) {
       await vendorsApi.remove(id);
       reload();
     }
@@ -62,7 +62,7 @@ export default function VendorsPage() {
     <>
       <Stack direction="row" alignItems="center" mb={2}>
         <Typography variant="h4" fontWeight={800} sx={{ flexGrow: 1 }}>
-          Vendors
+          Suppliers
         </Typography>
         {canEdit && (
           <Button variant="contained" startIcon={<AddIcon />} onClick={() => openDialog()}>
@@ -105,7 +105,7 @@ export default function VendorsPage() {
       </TableContainer>
 
       <Dialog open={open} onClose={() => setOpen(false)} maxWidth="xs" fullWidth>
-        <DialogTitle>{editing ? 'Edit Vendor' : 'Add Vendor'}</DialogTitle>
+        <DialogTitle>{editing ? 'Edit Supplier' : 'Add Supplier'}</DialogTitle>
         <DialogContent>
           <Stack spacing={2} mt={1}>
             <TextField label="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />

@@ -51,14 +51,30 @@ export default function TopBar() {
         {/* brand */}
         <Stack
           direction="row"
-          spacing={1.25}
+          spacing={1.5}
           alignItems="center"
           component={RouterLink}
           to="/"
           sx={{ textDecoration: 'none', color: 'text.primary', mr: 2 }}
         >
-          <Box component="img" src={logo} alt="" sx={{ width: 30, height: 30, borderRadius: 1.5 }} />
-          <Typography variant="h6" fontWeight={700} noWrap sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Box
+            component="img"
+            src={logo}
+            alt="SSPL Kitchen"
+            sx={{
+              width: 40,
+              height: 40,
+              display: 'block',
+              flexShrink: 0,
+              filter: 'drop-shadow(0 3px 7px rgba(194,84,14,0.30))',
+            }}
+          />
+          <Typography
+            variant="h6"
+            fontWeight={700}
+            noWrap
+            sx={{ display: { xs: 'none', sm: 'block' }, letterSpacing: '-0.01em' }}
+          >
             SSPL Kitchen
           </Typography>
         </Stack>
@@ -129,9 +145,20 @@ export default function TopBar() {
       {/* mobile drawer: sections + their screens */}
       <Drawer anchor="left" open={drawer} onClose={() => setDrawer(false)}>
         <Box sx={{ width: 268 }} role="navigation" onClick={() => setDrawer(false)}>
-          <Stack direction="row" spacing={1.25} alignItems="center" sx={{ p: 2 }}>
-            <Box component="img" src={logo} alt="" sx={{ width: 28, height: 28, borderRadius: 1.5 }} />
-            <Typography variant="h6" fontWeight={700}>
+          <Stack direction="row" spacing={1.5} alignItems="center" sx={{ p: 2 }}>
+            <Box
+              component="img"
+              src={logo}
+              alt="SSPL Kitchen"
+              sx={{
+                width: 36,
+                height: 36,
+                display: 'block',
+                flexShrink: 0,
+                filter: 'drop-shadow(0 3px 6px rgba(194,84,14,0.28))',
+              }}
+            />
+            <Typography variant="h6" fontWeight={700} sx={{ letterSpacing: '-0.01em' }}>
               SSPL Kitchen
             </Typography>
           </Stack>

@@ -44,7 +44,7 @@ export default function ContractorChargesPage() {
     <>
       <Stack direction="row" alignItems="center" mb={2} spacing={1}>
         <Typography variant="h4" fontWeight={800} sx={{ flexGrow: 1 }}>
-          Contractor Meal Back-charge
+          Contractor Billing
         </Typography>
         <Button variant="outlined" startIcon={<DownloadIcon />} onClick={exportCsv} disabled={!rows.length}>
           CSV
@@ -55,8 +55,8 @@ export default function ContractorChargesPage() {
       </Stack>
       {rows.length === 0 && (
         <Alert severity="info" sx={{ mb: 2 }}>
-          No billable consumers found for this month. Mark a consumer as “back-charged” with a meal
-          rate on the Consumers page to bill them here.
+          No diners to charge this month. Mark a diner as “Charged” with a meal rate on the Diners
+          page to bill them here.
         </Alert>
       )}
       <Stack direction="row" spacing={2} mb={2} alignItems="center">
@@ -69,7 +69,7 @@ export default function ContractorChargesPage() {
         <Table size="small">
           <TableHead>
             <TableRow>
-              <TableCell>Consumer</TableCell>
+              <TableCell>Diner</TableCell>
               <TableCell align="right">Meals</TableCell>
               <TableCell align="right">Rate</TableCell>
               <TableCell align="right">Amount</TableCell>
@@ -91,7 +91,7 @@ export default function ContractorChargesPage() {
             <TableFooter>
               <TableRow>
                 <TableCell colSpan={3}>
-                  <Typography fontWeight={700}>Total to back-charge</Typography>
+                  <Typography fontWeight={700}>Total to bill</Typography>
                 </TableCell>
                 <TableCell align="right">
                   <Typography sx={tabularSx} fontWeight={700} color="primary.main">

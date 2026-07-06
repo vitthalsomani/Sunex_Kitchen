@@ -50,7 +50,7 @@ export default function AliasCurationPage() {
     if (!target) return;
     await itemAliasesApi.create({ alias: name, item_id: target.id });
     setUnmatched((prev) => prev.filter((x) => x.name !== name));
-    setMsg(`Mapped “${name}” → ${target.name}. Re-seed valuation to apply.`);
+    setMsg(`Matched “${name}” → ${target.name}. Refresh stock value to apply.`);
   };
 
   const merge = async (source: ReviewItem, target: Item | null) => {
@@ -62,22 +62,23 @@ export default function AliasCurationPage() {
 
   const reseed = async () => {
     const res = await itemAliasesApi.reseed();
-    setMsg(`Re-seeded: ${res.items_valued} items valued · total ₹${res.total_value.toLocaleString('en-IN')}.`);
+    setMsg(`Refreshed: ${res.items_valued} items priced · total ₹${res.total_value.toLocaleString('en-IN')}.`);
   };
 
   return (
     <>
       <Stack direction="row" alignItems="center" mb={1} spacing={2}>
         <Typography variant="h4" fontWeight={800} sx={{ flexGrow: 1 }}>
-          Item Alias Curation
+          Name Cleanup
         </Typography>
         <Button variant="contained" startIcon={<AutoFixHighIcon />} onClick={reseed}>
-          Re-seed Valuation
+          Refresh Stock Value
         </Button>
       </Stack>
       <Typography variant="body2" color="text.secondary" mb={2}>
-        Map purchase/spelling variants to canonical items so stock &amp; cost don’t fragment. Suggestions
-        are AI-fuzzy — <b>always confirm before mapping</b>. After mapping, click Re-seed Valuation.
+        Match different spellings of the same item to one item, so your stock &amp; cost stay together.
+        Suggestions are automatic — <b>always check before matching</b>. After matching, click Refresh
+        Stock Value.
       </Typography>
       {msg && (
         <Alert severity="success" sx={{ mb: 2 }} onClose={() => setMsg(null)}>
@@ -88,10 +89,10 @@ export default function AliasCurationPage() {
       {/* Unmatched purchase names */}
       <Paper sx={{ p: 2, mb: 3 }}>
         <Typography variant="h6" fontWeight={700} gutterBottom>
-          Unmatched purchase names <Chip size="small" label={unmatched.length} sx={{ ml: 1 }} />
+          Names to match <Chip size="small" label={unmatched.length} sx={{ ml: 1 }} />
         </Typography>
         <Typography variant="body2" color="text.secondary" mb={1}>
-          Names from the purchase feed that don’t match any item. Map spelling variants to an existing
+          Names from purchases that don’t match any item. Match spelling variants to an existing
           item; genuinely new items (e.g. fresh vegetables, milk) should be added on the Items page.
         </Typography>
         <Box sx={{ overflowX: 'auto' }}>
@@ -101,7 +102,7 @@ export default function AliasCurationPage() {
                 <TableCell>Purchase name</TableCell>
                 <TableCell align="right"># rows</TableCell>
                 <TableCell>Suggested</TableCell>
-                <TableCell sx={{ minWidth: 260 }}>Map to item</TableCell>
+                <TableCell sx={{ minWidth: 260 }}>Match to item</TableCell>
                 <TableCell />
               </TableRow>
             </TableHead>
@@ -135,7 +136,7 @@ export default function AliasCurationPage() {
                     </TableCell>
                     <TableCell>
                       <Button size="small" variant="outlined" onClick={() => mapName(u.name, sel)} disabled={!sel}>
-                        Map
+                        Match
                       </Button>
                     </TableCell>
                   </TableRow>
@@ -163,11 +164,11 @@ export default function AliasCurationPage() {
       {/* Review duplicate items */}
       <Paper sx={{ p: 2 }}>
         <Typography variant="h6" fontWeight={700} gutterBottom>
-          Auto-created items to review <Chip size="small" label={review.length} sx={{ ml: 1 }} />
+          New items to review <Chip size="small" label={review.length} sx={{ ml: 1 }} />
         </Typography>
         <Typography variant="body2" color="text.secondary" mb={1}>
-          Items auto-created during import. If one duplicates a canonical item, merge it (moves its
-          stock &amp; cost). If it’s genuinely new, leave it.
+          Items added automatically during import. If one is the same as an existing item, merge it
+          (moves its stock &amp; cost). If it’s genuinely new, leave it.
         </Typography>
         <Divider sx={{ mb: 1 }} />
         <Table size="small">

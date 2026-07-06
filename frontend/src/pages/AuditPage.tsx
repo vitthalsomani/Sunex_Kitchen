@@ -31,7 +31,7 @@ export default function AuditPage() {
 
   return (
     <>
-      <PageHeader overline="Admin" title="Audit Log" subtitle="Recent create / update / delete actions" />
+      <PageHeader overline="Staff" title="Activity Log" subtitle="Recent create / update / delete actions" />
       <TableContainer component={Paper}>
         <Table size="small" stickyHeader>
           <TableHead>
@@ -39,7 +39,7 @@ export default function AuditPage() {
               <TableCell>When</TableCell>
               <TableCell>User</TableCell>
               <TableCell>Action</TableCell>
-              <TableCell>Resource</TableCell>
+              <TableCell>Section</TableCell>
               <TableCell align="right">Status</TableCell>
             </TableRow>
           </TableHead>

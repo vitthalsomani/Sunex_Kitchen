@@ -80,7 +80,7 @@ export default function InvoicesPage() {
       .filter((l) => l.item_id && Number(l.quantity) > 0 && Number(l.rate) >= 0)
       .map((l) => ({ item_id: l.item_id, quantity: Number(l.quantity), rate: Number(l.rate) }));
     if (!form.vendor_id || !validLines.length) {
-      setErr('Pick a vendor and at least one valid line.');
+      setErr('Pick a supplier and add at least one item.');
       return;
     }
     try {
@@ -103,18 +103,17 @@ export default function InvoicesPage() {
     <>
       <Stack direction="row" alignItems="center" mb={2} spacing={2}>
         <Typography variant="h4" fontWeight={800} sx={{ flexGrow: 1 }}>
-          Purchase Invoices
+          Bills
         </Typography>
         <TextField label="Month" size="small" value={month} onChange={(e) => setMonth(e.target.value)} />
         {canEdit && (
           <Button variant="contained" startIcon={<AddIcon />} onClick={openDialog}>
-            New Invoice
+            New Bill
           </Button>
         )}
       </Stack>
       <Alert severity="success" sx={{ mb: 2 }}>
-        This replaces the “Kitchen Material Inward” Google Form. Posting an invoice automatically
-        adds the items to store stock and creates FIFO cost layers.
+        Saving a bill automatically adds its items to your stock.
       </Alert>
 
       <TableContainer component={Paper}>
@@ -122,9 +121,9 @@ export default function InvoicesPage() {
           <TableHead>
             <TableRow>
               <TableCell>Date</TableCell>
-              <TableCell>Vendor</TableCell>
-              <TableCell>Invoice #</TableCell>
-              <TableCell align="right">Lines</TableCell>
+              <TableCell>Supplier</TableCell>
+              <TableCell>Bill #</TableCell>
+              <TableCell align="right">Items</TableCell>
               <TableCell align="right">Total</TableCell>
             </TableRow>
           </TableHead>
@@ -144,7 +143,7 @@ export default function InvoicesPage() {
               <TableRow>
                 <TableCell colSpan={5} align="center">
                   <Box py={3}>
-                    <Typography color="text.secondary">No invoices this month.</Typography>
+                    <Typography color="text.secondary">No bills this month.</Typography>
                   </Box>
                 </TableCell>
               </TableRow>
@@ -154,7 +153,7 @@ export default function InvoicesPage() {
       </TableContainer>
 
       <Dialog open={open} onClose={() => setOpen(false)} maxWidth="md" fullWidth>
-        <DialogTitle>New Purchase Invoice</DialogTitle>
+        <DialogTitle>New Bill</DialogTitle>
         <DialogContent>
           {err && (
             <Alert severity="error" sx={{ mb: 2 }}>
@@ -165,7 +164,7 @@ export default function InvoicesPage() {
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
               <TextField
                 select
-                label="Vendor"
+                label="Supplier"
                 value={form.vendor_id}
                 onChange={(e) => setForm({ ...form, vendor_id: e.target.value })}
                 sx={{ minWidth: 220 }}
@@ -178,21 +177,21 @@ export default function InvoicesPage() {
                 ))}
               </TextField>
               <TextField
-                label="Invoice Date"
+                label="Bill Date"
                 type="date"
                 value={form.invoice_date}
                 onChange={(e) => setForm({ ...form, invoice_date: e.target.value })}
                 InputLabelProps={{ shrink: true }}
               />
               <TextField
-                label="Invoice #"
+                label="Bill #"
                 value={form.invoice_number}
                 onChange={(e) => setForm({ ...form, invoice_number: e.target.value })}
               />
             </Stack>
             <Stack direction="row" spacing={2} alignItems="center">
               <Button variant="outlined" component="label" disabled={uploading}>
-                {uploading ? 'Uploading…' : 'Upload Invoice Photo'}
+                {uploading ? 'Uploading…' : 'Upload Bill Photo'}
                 <input
                   hidden
                   type="file"
@@ -227,7 +226,7 @@ export default function InvoicesPage() {
                 ))}
             </Stack>
 
-            <Divider>Line Items</Divider>
+            <Divider>Items</Divider>
             {lines.map((l, i) => {
               const amount = (Number(l.quantity) || 0) * (Number(l.rate) || 0);
               return (
@@ -292,7 +291,7 @@ export default function InvoicesPage() {
         <DialogActions>
           <Button onClick={() => setOpen(false)}>Cancel</Button>
           <Button variant="contained" onClick={save}>
-            Post Invoice
+            Save Bill
           </Button>
         </DialogActions>
       </Dialog>

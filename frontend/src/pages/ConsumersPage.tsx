@@ -79,7 +79,7 @@ export default function ConsumersPage() {
     reload();
   };
   const remove = async (id: string) => {
-    if (window.confirm('Delete consumer?')) {
+    if (window.confirm('Delete diner?')) {
       await consumersApi.remove(id);
       reload();
     }
@@ -89,7 +89,7 @@ export default function ConsumersPage() {
     <>
       <Stack direction="row" alignItems="center" mb={2}>
         <Typography variant="h4" fontWeight={800} sx={{ flexGrow: 1 }}>
-          Consumers
+          Diners
         </Typography>
         {canEdit && (
           <Button variant="contained" startIcon={<AddIcon />} onClick={() => openDialog()}>
@@ -103,7 +103,7 @@ export default function ConsumersPage() {
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Type</TableCell>
-              <TableCell>Billable</TableCell>
+              <TableCell>Charged</TableCell>
               <TableCell align="right">Meal Rate</TableCell>
               <TableCell>Active</TableCell>
               {canEdit && <TableCell align="right">Actions</TableCell>}
@@ -136,7 +136,7 @@ export default function ConsumersPage() {
       </TableContainer>
 
       <Dialog open={open} onClose={() => setOpen(false)} maxWidth="xs" fullWidth>
-        <DialogTitle>{editing ? 'Edit Consumer' : 'Add Consumer'}</DialogTitle>
+        <DialogTitle>{editing ? 'Edit Diner' : 'Add Diner'}</DialogTitle>
         <DialogContent>
           <Stack spacing={2} mt={1}>
             <TextField label="Name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} required />
@@ -154,7 +154,7 @@ export default function ConsumersPage() {
             </TextField>
             <Stack direction="row" alignItems="center" spacing={1}>
               <Switch checked={form.billable} onChange={(e) => setForm({ ...form, billable: e.target.checked })} />
-              <Typography>Back-charged for meals</Typography>
+              <Typography>Charged for meals</Typography>
             </Stack>
             {form.billable && (
               <TextField

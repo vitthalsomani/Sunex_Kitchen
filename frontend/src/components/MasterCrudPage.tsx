@@ -130,7 +130,7 @@ export default function MasterCrudPage({
                 startIcon={<UploadIcon />}
                 onClick={() => fileRef.current?.click()}
               >
-                Bulk Upload
+                Upload CSV
               </Button>
             </Tooltip>
             <Button variant="contained" startIcon={<AddIcon />} onClick={openCreate}>

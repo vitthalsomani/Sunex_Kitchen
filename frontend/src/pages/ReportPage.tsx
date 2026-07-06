@@ -35,7 +35,7 @@ export default function ReportPage() {
   return (
     <>
       <Typography variant="h4" gutterBottom>
-        Monthly Mess Cost Analysis
+        Monthly Cost Report
       </Typography>
       <Stack direction="row" spacing={2} mb={2}>
         <TextField
@@ -66,7 +66,7 @@ export default function ReportPage() {
               <TableCell align="right">Grocery & Veg</TableCell>
               <TableCell align="right">Oil</TableCell>
               <TableCell align="right">Other</TableCell>
-              <TableCell align="right">Manpower</TableCell>
+              <TableCell align="right">Staff</TableCell>
               <TableCell align="right">Contractor</TableCell>
               <TableCell align="right">Total Expense</TableCell>
               <TableCell align="right" sx={{ bgcolor: 'success.light' }}>

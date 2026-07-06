@@ -63,7 +63,7 @@ export default function ConsumptionPage() {
   return (
     <>
       <Typography variant="h4" fontWeight={800} mb={2}>
-        Daily Meal Consumption
+        Daily Meals
       </Typography>
       <Stack direction="row" spacing={2} mb={2} alignItems="center" flexWrap="wrap">
         <TextField

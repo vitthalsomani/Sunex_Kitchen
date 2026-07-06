@@ -29,46 +29,46 @@ export interface NavSection {
  * Routes and role-gating mirror App.tsx exactly — nav is presentation only.
  */
 export const SECTIONS: NavSection[] = [
-  { key: 'dashboard', label: 'Dashboard', icon: <DashboardIcon />, to: '/', tabs: [] },
+  { key: 'dashboard', label: 'Home', icon: <DashboardIcon />, to: '/', tabs: [] },
   {
     key: 'procurement',
-    label: 'Procurement',
+    label: 'Purchases',
     icon: <ReceiptLongIcon />,
     to: '/invoices',
-    tabs: [{ label: 'Purchase Invoices', to: '/invoices' }],
+    tabs: [{ label: 'Bills', to: '/invoices' }],
   },
   {
     key: 'store',
-    label: 'Store',
+    label: 'Stock',
     icon: <Inventory2Icon />,
     to: '/stock',
     tabs: [
-      { label: 'Balances', to: '/stock' },
-      { label: 'Valuation', to: '/valuation' },
-      { label: 'Issue / Outward', to: '/outward' },
+      { label: 'Current Stock', to: '/stock' },
+      { label: 'Stock Value', to: '/valuation' },
+      { label: 'Items Given Out', to: '/outward' },
     ],
   },
   {
     key: 'consumption',
-    label: 'Consumption',
+    label: 'Meals',
     icon: <RestaurantIcon />,
     to: '/consumption',
     tabs: [{ label: 'Daily Meals', to: '/consumption' }],
   },
   {
     key: 'masters',
-    label: 'Masters',
+    label: 'Master',
     icon: <CategoryIcon />,
     to: '/items',
     tabs: [
       { label: 'Items', to: '/items' },
-      { label: 'Vendors', to: '/vendors' },
-      { label: 'Consumers', to: '/consumers' },
+      { label: 'Suppliers', to: '/vendors' },
+      { label: 'Diners', to: '/consumers' },
       { label: 'Canteens', to: '/canteens' },
       { label: 'Staff', to: '/staff' },
       { label: 'Units', to: '/units' },
       { label: 'Categories', to: '/categories' },
-      { label: 'Alias Curation', to: '/item-aliases' },
+      { label: 'Name Cleanup', to: '/item-aliases' },
     ],
   },
   {
@@ -78,18 +78,18 @@ export const SECTIONS: NavSection[] = [
     to: '/reports/cost-per-meal',
     tabs: [
       { label: 'Cost per Meal', to: '/reports/cost-per-meal' },
-      { label: 'Contractor Charges', to: '/reports/contractor-charges' },
+      { label: 'Contractor Billing', to: '/reports/contractor-charges' },
     ],
   },
   {
     key: 'admin',
-    label: 'Admin',
+    label: 'Staff',
     icon: <ShieldIcon />,
     to: '/users',
     roles: ['admin'],
     tabs: [
       { label: 'Users', to: '/users', roles: ['admin'] },
-      { label: 'Audit Log', to: '/audit', roles: ['admin'] },
+      { label: 'Activity Log', to: '/audit', roles: ['admin'] },
     ],
   },
 ];

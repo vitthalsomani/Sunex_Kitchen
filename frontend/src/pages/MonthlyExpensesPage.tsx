@@ -74,7 +74,7 @@ export default function MonthlyExpensesPage() {
   return (
     <>
       <Typography variant="h4" gutterBottom>
-        Monthly Expenses (Manpower + Contractor)
+        Monthly Expenses
       </Typography>
       {msg && (
         <Alert severity="info" sx={{ mb: 2 }} onClose={() => setMsg(null)}>
@@ -93,7 +93,7 @@ export default function MonthlyExpensesPage() {
             />
             <TextField
               type="number"
-              label="Manpower Salary (₹)"
+              label="Staff Salary (₹)"
               value={manpower}
               onChange={(e) => setManpower(e.target.value === '' ? '' : Number(e.target.value))}
               disabled={!canEdit}
@@ -133,7 +133,7 @@ export default function MonthlyExpensesPage() {
           <TableHead>
             <TableRow>
               <TableCell>Month</TableCell>
-              <TableCell align="right">Manpower Salary</TableCell>
+              <TableCell align="right">Staff Salary</TableCell>
               <TableCell align="right">Contractor Payment</TableCell>
               <TableCell align="right">Total</TableCell>
               <TableCell>Notes</TableCell>
