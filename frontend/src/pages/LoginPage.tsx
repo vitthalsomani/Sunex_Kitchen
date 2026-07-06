@@ -19,7 +19,7 @@ import KeyboardCapslockRoundedIcon from '@mui/icons-material/KeyboardCapslockRou
 import { Navigate, useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../context/AuthContext';
-import { MONO_FONT } from '../theme';
+import { BODY_FONT, DISPLAY_FONT, MONO_FONT } from '../theme';
 import { Item, Stagger } from '../components/ui';
 
 const LOGO = `${import.meta.env.BASE_URL}favicon.png`;
@@ -228,7 +228,7 @@ export default function LoginPage() {
         gridTemplateColumns: { xs: '1fr', md: '1.05fr 1fr' },
         overflow: { md: 'hidden' },
         bgcolor: '#FBFBFC',
-        fontFamily: '"Hanken Grotesk", sans-serif',
+        fontFamily: BODY_FONT,
       }}
     >
       {/* ── Left: warm thali hero ─────────────────────────────────────── */}
@@ -273,7 +273,7 @@ export default function LoginPage() {
             }}
           />
           <Typography
-            sx={{ fontFamily: '"Space Grotesk", sans-serif', fontWeight: 600, fontSize: 22, letterSpacing: '0.2px' }}
+            sx={{ fontFamily: DISPLAY_FONT, fontWeight: 600, fontSize: 22, letterSpacing: '0.2px' }}
           >
             SSPL&nbsp;Kitchen
           </Typography>
@@ -288,7 +288,7 @@ export default function LoginPage() {
         <Box sx={{ position: 'relative', maxWidth: 400 }}>
           <Typography
             sx={{
-              fontFamily: '"Space Grotesk", sans-serif',
+              fontFamily: DISPLAY_FONT,
               fontWeight: 500,
               fontSize: 'clamp(24px, 2.4vw, 30px)',
               lineHeight: 1.2,
@@ -335,7 +335,7 @@ export default function LoginPage() {
                   aria-hidden
                   sx={{ width: 36, height: 36, borderRadius: '10px' }}
                 />
-                <Typography sx={{ fontFamily: '"Space Grotesk", sans-serif', fontWeight: 600, fontSize: 19, color: '#14181B' }}>
+                <Typography sx={{ fontFamily: DISPLAY_FONT, fontWeight: 600, fontSize: 19, color: '#14181B' }}>
                   SSPL Kitchen
                 </Typography>
               </Stack>
@@ -357,7 +357,7 @@ export default function LoginPage() {
               </Typography>
               <Typography
                 sx={{
-                  fontFamily: '"Space Grotesk", sans-serif',
+                  fontFamily: DISPLAY_FONT,
                   fontWeight: 600,
                   fontSize: 'clamp(26px, 3vw, 30px)',
                   color: '#14181B',

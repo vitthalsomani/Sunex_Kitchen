@@ -14,9 +14,9 @@ export const BRAND = {
   warn: '#E0A012',
 };
 
-const DISPLAY_FONT = '"Space Grotesk", "Hanken Grotesk", system-ui, sans-serif';
-const BODY_FONT = '"Hanken Grotesk", system-ui, -apple-system, sans-serif';
-export const MONO_FONT = '"Space Mono", ui-monospace, "SFMono-Regular", monospace';
+export const DISPLAY_FONT = '"Plus Jakarta Sans", "Inter", system-ui, sans-serif';
+export const BODY_FONT = '"Inter", system-ui, -apple-system, "Segoe UI", sans-serif';
+export const MONO_FONT = '"JetBrains Mono", ui-monospace, "SFMono-Regular", monospace';
 
 /** Apply to any cell/label that holds a number so figures align like a ledger. */
 export const tabularSx = { fontFamily: MONO_FONT, fontVariantNumeric: 'tabular-nums' } as const;
@@ -46,16 +46,19 @@ export function buildTheme(mode: 'light' | 'dark'): Theme {
     shape: { borderRadius: 14 },
     typography: {
       fontFamily: BODY_FONT,
-      h1: { fontFamily: DISPLAY_FONT, fontWeight: 700, letterSpacing: '-0.02em' },
-      h2: { fontFamily: DISPLAY_FONT, fontWeight: 700, letterSpacing: '-0.02em' },
-      h3: { fontFamily: DISPLAY_FONT, fontWeight: 700, letterSpacing: '-0.02em' },
-      h4: { fontFamily: DISPLAY_FONT, fontWeight: 600, letterSpacing: '-0.015em' },
-      h5: { fontFamily: DISPLAY_FONT, fontWeight: 600, letterSpacing: '-0.01em' },
-      h6: { fontFamily: DISPLAY_FONT, fontWeight: 600 },
-      subtitle1: { fontWeight: 600 },
-      subtitle2: { fontWeight: 600 },
-      button: { textTransform: 'none', fontWeight: 700, letterSpacing: '0.01em' },
-      overline: { letterSpacing: '0.14em', fontWeight: 700, fontSize: '0.68rem' },
+      h1: { fontFamily: DISPLAY_FONT, fontWeight: 800, fontSize: '2.5rem', lineHeight: 1.1, letterSpacing: '-0.02em' },
+      h2: { fontFamily: DISPLAY_FONT, fontWeight: 800, fontSize: '2rem', lineHeight: 1.15, letterSpacing: '-0.02em' },
+      h3: { fontFamily: DISPLAY_FONT, fontWeight: 700, lineHeight: 1.2, letterSpacing: '-0.02em' },
+      h4: { fontFamily: DISPLAY_FONT, fontWeight: 700, fontSize: '1.5rem', lineHeight: 1.25, letterSpacing: '-0.015em' },
+      h5: { fontFamily: DISPLAY_FONT, fontWeight: 700, fontSize: '1.15rem', lineHeight: 1.3, letterSpacing: '-0.01em' },
+      h6: { fontFamily: DISPLAY_FONT, fontWeight: 600, fontSize: '1rem', lineHeight: 1.4, letterSpacing: '-0.005em' },
+      subtitle1: { fontWeight: 600, lineHeight: 1.5 },
+      subtitle2: { fontWeight: 600, lineHeight: 1.5 },
+      body1: { fontSize: '0.95rem', lineHeight: 1.55 },
+      body2: { fontSize: '0.875rem', lineHeight: 1.5 },
+      button: { textTransform: 'none', fontWeight: 600, letterSpacing: 0 },
+      overline: { letterSpacing: '0.12em', fontWeight: 700, fontSize: '0.68rem' },
+      caption: { fontSize: '0.75rem', lineHeight: 1.4 },
     },
     components: {
       MuiCssBaseline: {
@@ -106,7 +109,7 @@ export function buildTheme(mode: 'light' | 'dark'): Theme {
           },
         },
       },
-      MuiChip: { styleOverrides: { root: { fontWeight: 700, borderRadius: 8 } } },
+      MuiChip: { styleOverrides: { root: { fontWeight: 600, borderRadius: 8 } } },
       MuiTextField: { defaultProps: { variant: 'outlined' } },
       MuiOutlinedInput: {
         styleOverrides: {
@@ -120,9 +123,9 @@ export function buildTheme(mode: 'light' | 'dark'): Theme {
       MuiTableCell: {
         styleOverrides: {
           head: {
-            fontWeight: 700,
+            fontWeight: 600,
             fontSize: '0.7rem',
-            letterSpacing: '0.06em',
+            letterSpacing: '0.05em',
             textTransform: 'uppercase',
             color: steel,
             borderColor: line,
@@ -143,7 +146,7 @@ export function buildTheme(mode: 'light' | 'dark'): Theme {
             textTransform: 'none',
             fontWeight: 600,
             minHeight: 44,
-            letterSpacing: '0.01em',
+            letterSpacing: 0,
             color: steel,
             '&.Mui-selected': { color: ink },
           },
@@ -151,7 +154,7 @@ export function buildTheme(mode: 'light' | 'dark'): Theme {
       },
       MuiDialog: { styleOverrides: { paper: { borderRadius: 18, backgroundImage: 'none' } } },
       MuiTooltip: {
-        styleOverrides: { tooltip: { borderRadius: 8, fontWeight: 600, fontSize: '0.74rem' } },
+        styleOverrides: { tooltip: { borderRadius: 8, fontWeight: 500, fontSize: '0.74rem' } },
       },
     },
   });
